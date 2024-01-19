@@ -36,4 +36,4 @@ VOLUME ./data/player/edits/zz/oneshot/
 
 ENV RUST_BACKTRACE=1
 EXPOSE 8880
-CMD ./headless --port=8881 & socat TCP-LISTEN:8880,fork TCP:127.0.0.1:8881
+CMD ./headless --port=8880
