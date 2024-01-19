@@ -11,7 +11,7 @@ RUN git checkout v0.3.48
 RUN cargo run --bin updater -- download --minimal
 RUN cargo build --release --bin headless
 
-FROM alpine/socat:latest
+FROM debian:12-slim
 ARG MAP_NAME
 ARG SCENARIO_NAME
 
@@ -36,4 +36,8 @@ VOLUME ./data/player/edits/zz/oneshot/
 
 ENV RUST_BACKTRACE=1
 EXPOSE 8880
-CMD ./headless --port=8880
+
+RUN apt-get update && apt-get install -y socat
+
+# using socat to forward the port because application has ip hardcoded.
+CMD ./headless --port=8881 & socat TCP-LISTEN:8880,fork TCP:127.0.0.1:8881
