@@ -12,8 +12,6 @@ RUN cargo run --bin updater -- download --minimal
 RUN cargo build --release --bin headless
 
 FROM debian:12-slim
-ARG MAP_NAME
-ARG SCENARIO_NAME
 
 WORKDIR /usr/src/app
 
